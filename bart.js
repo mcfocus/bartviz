@@ -7,6 +7,8 @@ $(document).ready(function(){
 
 //work: auto detect nearest station = my current location
 //work: choose from map
+//work: popup more info
+//work: mobile webapp
   $('#departure_stn').change(function() {
 
     my_departure = $('select#departure_stn').val();
@@ -70,9 +72,9 @@ function get_trains(departure) {
 
 
 
-//work: beautify the map with platform
-//work: beautify the train
-//work: beautify the lanes. Combine all trains into same lanes
+//done: beautify the map with platform
+//done: beautify the train
+//done: beautify the lanes. Combine all trains into same lanes
 function set_trains (myTrains) {
 
   for (var i = myTrains.length - 1; i >= 0; i--) {
