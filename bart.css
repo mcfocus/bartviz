@@ -1,0 +1,12 @@
+.train_map {
+	width: 100%;
+}
+
+.each_train {
+	position: relative;
+	height: 20px;
+	width: 150px;
+
+	margin-bottom: 30px;
+}
+
