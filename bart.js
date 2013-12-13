@@ -378,18 +378,20 @@ function set_trains (myTrains) {
 function animate_train(trainID,waiting) {
 
   var animateLength = waiting*20;
-  var animateTime = waiting*60000;//should be *60000
-  // var updatingTime = waiting;
+  var animateTime = waiting*60000;
 
-  // var timerId = setInterval(function() {
-  //   if (updatingTime !== -1) {
-  //     $('#' + trainID).text(updatingTime);
-  //     updatingTime -= 1;
-  //   } else {
-  //     $('#' + trainID).html('<p>Boarding</p>');
-  //     clearInterval(timerId);
-  //   }
-  // },60000);
+  var updatingTime = waiting;
+  $('#' + trainID).html('<p>' + updatingTime + 'min</p>');
+
+  var timerId = setInterval(function() {
+    if (updatingTime !== -1) {
+      $('#' + trainID).html('<p>' + updatingTime + 'min</p>');
+      updatingTime -= 1;
+    } else {
+      $('#' + trainID).html('<p>Boarding</p>');
+      clearInterval(timerId);
+    }
+  },60000);
 
 
   $('#' + trainID).animate({
