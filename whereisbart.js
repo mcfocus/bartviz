@@ -38,7 +38,8 @@ function setupMap() {
   var layer = new L.TileLayer('http://mt1.google.com/vt/lyrs=m@121,transit|vm:1&hl=en&opts=r&x={x}&y={y}&z={z}', {
     attribution: 'Map data &copy;2012 Google',
     maxZoom: 14
-});
+  });
+  
   var sf = new L.LatLng(37.779224, -122.313831);
   map.setView(sf, 10).addLayer(layer);
 

@@ -2,6 +2,56 @@ body {
 	font-family: helvetica;
 	margin: 0px;
 	padding: 0px;
+	background-color: rgb(251,251,251);
+}
+
+.header {
+	width: 100%;
+	color: black;
+	text-align: center;
+	padding: 12px 0px;
+	background-color: white;
+	box-shadow: 0px 1px 2px rgba(0,0,0,1);
+	z-index: 99999999;
+}
+
+.header_title {
+	font-size: 1.95em;
+	font-weight: bold;
+}
+
+.header_sub {
+	margin-top: 10px;
+	font-weight: lighter;
+	font-size: .9em;
+}
+
+.user_input {
+	position: relative;
+	z-index: 9;
+	width: 100%;
+	height: 300px;
+	padding: 0px;
+}
+
+#map {
+	width: 100%;
+	height: 100%;
+	z-index: -10;
+}
+
+.dropmenu {
+	position: absolute;
+	top: 10px;
+	left: 50px;
+}
+
+.departure_stn {
+	-webkit-appearance: menulist-button;
+	height: 40px;
+	font-size: 1.1em;
+	border: 0px;
+	border-radius: 0px;
 }
 
 .axis_map {
@@ -21,9 +71,38 @@ body {
 }
 
 .axis1 {
-	position: relative;
-	left: 20px;
-}
+	position: absolute;
+	left: 20px;}
+.axis5 {
+	position: absolute;
+	left: 100px;}
+.axis10 {
+	position: absolute;
+	left: 200px;}
+.axis15 {
+	position: absolute;
+	left: 300px;}
+.axis20 {
+	position: absolute;
+	left: 400px;}
+.axis25 {
+	position: absolute;
+	left: 500px;}
+.axis30 {
+	position: absolute;
+	left: 600px;}
+.axis35 {
+	position: absolute;
+	left: 700px;}
+.axis40 {
+	position: absolute;
+	left: 800px;}
+.axis45 {
+	position: absolute;
+	left: 900px;}
+.axis50 {
+	position: absolute;
+	left: 1000px;}
 
 .train_map {
 	position: absolute;
@@ -90,8 +169,25 @@ body {
 	top: -3px;
 	height: 20px;
 	width: 30px;
+	
 	border-radius: 20px;
 	border: 3px solid rgb(70,70,70);
 	display: inline-block;
 }
 
+.each_train p {
+	font-size: 9px;
+	color: white;
+	position: relative;
+	top: -4px;
+	left: 2px;
+	text-shadow: 0px 0px 1px black;
+}
+
+.boarding_train {
+	width: 42px;
+	border-color: white;
+	box-shadow: 0px 2px 3px rgba(0,0,0,.5), 0px 1px 2px rgba(0,0,0,.4) inset;
+	border-bottom-left-radius: 0px;
+	border-top-left-radius: 0px;
+}
