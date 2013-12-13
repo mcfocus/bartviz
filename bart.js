@@ -4,15 +4,14 @@ $(document).ready(function(){
   etd_num = 0;
   estimate_num = 0;
 
+//DONE: Axis & blink when arriving at station
+//ToDo: Select station from map
+//ToDo: D3JS
+//ToDo: beautify
 
-//work: auto detect nearest station = my current location
-//work: choose from map
-//work: popup more info
-//work: mobile webapp
   $('#departure_stn').change(function() {
 
     my_departure = $('select#departure_stn').val();
-    //my_departure = $('select#departure_stn').val();
     $('.train_map').html('');
     $('.train_map').html('<div class="myStation"><p>Currently at ' + my_departure + '</p></div>')
     get_trains(my_departure);
@@ -101,6 +100,9 @@ function set_trains (myTrains) {
       
     };
   };  
+
+  $('.axis_map').css('height', $('.train_map').height());
+  $('.axis_map').show();
 };
 
 
@@ -108,14 +110,24 @@ function set_trains (myTrains) {
 function animate_train(trainID,waiting) {
 
   var animateLength = waiting*20;
-  var animateTime = waiting*1000;//should be *60000
+  var animateTime = waiting*2500;//should be *60000
   //console.log(animateLength);
 
   $('#' + trainID).animate({
 
     left: "-=" + animateLength
 
-  },animateTime);
+  },animateTime, function() {
+    
+    $(this).css({
+      'border-color': 'white',
+      'box-shadow': '0px 2px 3px rgba(0,0,0,.5), 0px 1px 2px rgba(0,0,0,.4) inset'
+    });
+
+    $(this).blink({delay:400}).delay(15000).fadeOut(500); 
+
+  });
+
 }
 
 
