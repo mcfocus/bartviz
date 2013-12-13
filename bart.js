@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
   my_departure = 'none';
+  my_departure_name = 'none';
   etd_num = 0;
   estimate_num = 0;
 
@@ -59,12 +60,12 @@ $(document).ready(function(){
         latlng: [37.690754,-122.075567]
       },
       {
-        name: "Civic Center/UN Plaza",
+        name: "Civic Center / UN Plaza",
         code: "CIVC",
         latlng: [37.779528,-122.413756]
       },
       {
-        name: "Coliseum/Oakland Airport",
+        name: "Coliseum / Oakland Airport",
         code: "COLS",
         latlng: [37.754006, -122.197273]
       },
@@ -89,7 +90,7 @@ $(document).ready(function(){
         latlng: [37.869867, -122.268045]
       },
       {
-        name: "Dublin/Pleasanton",
+        name: "Dublin / Pleasanton",
         code: "DUBL",
         latlng: [37.701695, -121.900367]
       },
@@ -159,7 +160,7 @@ $(document).ready(function(){
         latlng: [37.87404, -122.283451]
       },
       {
-        name: "North Concord/Martinez",
+        name: "North Concord / Martinez",
         code: "NCON",
         latlng: [38.003275, -122.024597]
       },
@@ -174,7 +175,7 @@ $(document).ready(function(){
         latlng: [38.018914, -121.945154]
       },
       {
-        name: "Pleasant Hill/Contra Costa Centre",
+        name: "Pleasant Hill",
         code: "PHIL",
         latlng: [37.928403, -122.056013]
       },
@@ -229,7 +230,7 @@ $(document).ready(function(){
         latlng: [37.905628, -122.067423]
       },
       {
-        name: "West Dublin/Pleasanton",
+        name: "West Dublin / Pleasanton",
         code: "WDUB",
         latlng: [37.699759, -121.928099]
       },
@@ -245,16 +246,18 @@ $(document).ready(function(){
   stations.forEach(function (station) {
 
     var circMarker = L.circle((station.latlng), 300, {
-      color: 'red',
-      fillColor: '#f03',
-      fillOpacity: 0.8
+      color: 'black',
+      fillColor: 'white',
+      fillOpacity: 0.7
     }).addTo(map);
 
     circMarker.code = station.code;
+    circMarker.name = station.name;
 
     circMarker.on('click', function(e) {
 
       my_departure = $(this)[0].code;
+      my_departure_name = $(this)[0].name;
       get_trains(my_departure);
 
     });
@@ -265,6 +268,8 @@ $(document).ready(function(){
   $('.departure_stn').change(function() {
 
     my_departure = $('.departure_stn').val();
+    my_departure_name = $('.departure_stn').find(':selected').text();
+    //console.log(my_departure_name);
     get_trains(my_departure);
 
   });
@@ -274,9 +279,21 @@ $(document).ready(function(){
 
 function get_trains(departure) {
   $('.train_map').html('');
-  $('.train_map').html('<div class="myStation"><p>Currently at ' + my_departure + '</p></div>');  
+  $('.train_map').html('<div class="myStation"><p>Currently at ' + my_departure_name + '</p></div>');  
 
   if (my_departure!=='none') {
+
+    // var all_trains = [
+    //   {
+    //     dest: 'Richmond',
+    //     trains: [
+    //       {
+    //         color: 'red',
+    //         waiting: '18'
+    //       }
+    //     ]
+    //   }
+    // ]
 
     $.ajax({
       type:"GET",
@@ -316,19 +333,17 @@ function get_trains(departure) {
 
       }
     });
+
   };
 };
 
 
 
-//done: beautify the map with platform
-//done: beautify the train
-//done: beautify the lanes. Combine all trains into same lanes
 function set_trains (myTrains) {
 
   for (var i = myTrains.length - 1; i >= 0; i--) {
 
-    thisDestHTML = '<div class="each_dest"> <div class="dest_name">' + myTrains[i].dest + '</div><div class="dest_lane"><div class="dest_upcoming" id="dest' + i + '"></div></div></div>';
+    thisDestHTML = '<div class="each_dest"> <div class="dest_name">' + myTrains[i].dest + ' Train</div><div class="dest_lane"><div class="dest_upcoming" id="dest' + i + '"></div></div></div>';
     $('.train_map').append(thisDestHTML);
     
     for (var j = myTrains[i].trains.length - 1; j >= 0; j--) {
@@ -351,8 +366,11 @@ function set_trains (myTrains) {
     };
   };  
 
-  $('.axis_map').css('height', $('.train_map').height());
-  $('.axis_map').show();
+  var axis_height = Number($('.train_map').height()) + 40;
+  var platform_height = axis_height - 42;
+
+  $('.myStation').css('height', platform_height);
+  $('.axis_map').css('height', axis_height).show();
 };
 
 
@@ -360,8 +378,19 @@ function set_trains (myTrains) {
 function animate_train(trainID,waiting) {
 
   var animateLength = waiting*20;
-  var animateTime = waiting*2500;//should be *60000
-  //console.log(animateLength);
+  var animateTime = waiting*60000;//should be *60000
+  // var updatingTime = waiting;
+
+  // var timerId = setInterval(function() {
+  //   if (updatingTime !== -1) {
+  //     $('#' + trainID).text(updatingTime);
+  //     updatingTime -= 1;
+  //   } else {
+  //     $('#' + trainID).html('<p>Boarding</p>');
+  //     clearInterval(timerId);
+  //   }
+  // },60000);
+
 
   $('#' + trainID).animate({
 
@@ -369,8 +398,8 @@ function animate_train(trainID,waiting) {
 
   },animateTime, function() {
     
-    $(this).addClass('boarding_train');
     $(this).html('<p>Boarding</p>');
+    $(this).addClass('boarding_train');
     $(this).blink({delay:600}).delay(15000).fadeOut(500); 
 
   });
