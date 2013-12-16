@@ -74,37 +74,37 @@ body {
 
 .axis1 {
 	position: absolute;
-	left: 20px;}
+	left: 30px;}
 .axis5 {
 	position: absolute;
-	left: 100px;}
+	left: 150px;}
 .axis10 {
 	position: absolute;
-	left: 200px;}
+	left: 300px;}
 .axis15 {
 	position: absolute;
-	left: 300px;}
+	left: 450px;}
 .axis20 {
 	position: absolute;
-	left: 400px;}
+	left: 600px;}
 .axis25 {
 	position: absolute;
-	left: 500px;}
+	left: 750px;}
 .axis30 {
 	position: absolute;
-	left: 600px;}
+	left: 900px;}
 .axis35 {
 	position: absolute;
-	left: 700px;}
+	left: 1050px;}
 .axis40 {
 	position: absolute;
-	left: 800px;}
+	left: 1200px;}
 .axis45 {
 	position: absolute;
-	left: 900px;}
+	left: 1350px;}
 .axis50 {
 	position: absolute;
-	left: 1000px;}
+	left: 1500px;}
 
 .train_map {
 	position: absolute;

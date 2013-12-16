@@ -358,7 +358,7 @@ function set_trains (myTrains) {
       $('#'+thisTrainID).css({
 
         'background-color': thisTrainColor,
-        'left': thisTrainTime*20
+        'left': thisTrainTime*30
       });
       
       animate_train(thisTrainID,thisTrainTime);
@@ -377,7 +377,7 @@ function set_trains (myTrains) {
 
 function animate_train(trainID,waiting) {
 
-  var animateLength = waiting*20;
+  var animateLength = waiting*30;
   var animateTime = waiting*60000;
 
   var updatingTime = waiting;
